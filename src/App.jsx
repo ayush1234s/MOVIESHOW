@@ -12,11 +12,14 @@ function App() {
     <>
       <div className="app">
         <Navbar />
-        <MovieList />
+        <MovieList type="popular" title="Popular" />
+        <MovieList type="top_rated" title="Top Rated" />
+        <MovieList type="upcoming" title="Upcoming" />
         <main></main>
       </div>
       </>
   );
 };
+
 
 export default App;

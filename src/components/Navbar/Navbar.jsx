@@ -11,13 +11,14 @@ const Navbar = () => {
 
         <div className="navbar-links">
             <DarkMode />
-            <a href="">Popular🔥</a>
-            <a href="">Top Rated⭐</a>
-            <a href="">Upcoming😛</a>
+            <a href="#popular">Popular🔥</a>
+            <a href="#top_rated">Top Rated⭐</a>
+            <a href="#upcoming">Upcoming😛</a>
         </div>
     </nav>
   );
 } ;  
+
 
 
 export default Navbar;

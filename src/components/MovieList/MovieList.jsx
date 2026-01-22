@@ -4,7 +4,7 @@ import './MovieList.css';
 import MovieCard from './MovieCard';
 import FilterGroup from './FilterGroup';
 
-const MovieList = () => {
+const MovieList = ({type, title}) => {
 
     const [movies, setMovies] = useState([]);
     const [allMovies, setAllMovies] = useState([]);
@@ -22,7 +22,7 @@ const MovieList = () => {
 
     const fetchMovies = async () => {
         const response = await fetch(
-            "https://api.themoviedb.org/3/movie/popular?api_key=094ef3abfe2380cc211616fc47eb0e8e"
+            `https://api.themoviedb.org/3/movie/${type}?api_key=094ef3abfe2380cc211616fc47eb0e8e`
         );
 
         const data = await response.json();
@@ -77,10 +77,10 @@ const MovieList = () => {
     };
 
     return (
-        <section className="movie_list">
+        <section className="movie_list" id={type}>
 
             <header className="align_center movie_list_header">
-                <h2 className="movie_list_heading">Popular 🔥</h2>
+                <h2 className="movie_list_heading">{title}{ " "} 🔥</h2>
 
                 <div className="align_center movie_list_fs">
 
