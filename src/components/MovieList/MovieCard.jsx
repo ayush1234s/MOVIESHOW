@@ -1,22 +1,38 @@
 import {useState} from 'react';
 import './MovieCard.css';           
 
-const MovieCard = () => {
-
+const MovieCard = ({ movie }) => {
     return (
-        <a href="" className='movie_card'>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3YKw6n-RDgqyFy69GSuuiue2qkkByXQLJLg&s" alt="Movie Poster" className='movie_poster' />
+        <a
+            href={`https://www.themoviedb.org/movie/${movie.id}`}
+            target="_blank"
+            rel="noreferrer"
+            className="movie_card"
+        >
+            <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt={movie.original_title}
+                className="movie_poster"
+            />
+
             <div className="movie_details">
-                <h3 className='movie_details_heading'>Movie Name</h3>
-                <div className="align_center movie_date_rate">
-                    <p>10-20-2020</p>
-                    <p>8.0 ⭐</p>
-                    <p className="movie_description">
-                        Lorem ipsum dolor sit amet consectetur.
-                    </p>
+                <h3 className="movie_details_heading">
+                    {movie.original_title}
+                </h3>
+
+                <div className="movie_date_rate">
+                    <p>{movie.release_date}</p>
+                    <p>{movie.vote_average} ⭐</p>
                 </div>
+
+                <p className="movie_description">
+                    {movie.overview
+                        ? movie.overview.slice(0, 100) + "..."
+                        : "No description available."}
+                </p>
             </div>
         </a>
     );
-}
+};
+
 export default MovieCard;
