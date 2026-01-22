@@ -1,95 +1,84 @@
 import { useEffect, useState } from 'react'
 import './MovieList.css'
 import MovieCard from './MovieCard';
+import FilterGroup from './FilterGroup';
 
 // MovieList Component
 
-const MovieList = () => {  
-   const [movies, setMovies] = useState([]);
-const [allMovies, setAllMovies] = useState([]);
-const [minRating, setMinRating] = useState(0);
+const MovieList = () => {
+    const [movies, setMovies] = useState([]);
+    const [allMovies, setAllMovies] = useState([]);
+    const [minRating, setMinRating] = useState(0);
 
-// Fetch movies on component mount
-    useEffect(() => { 
-       fetchMovies();
+    // Fetch movies on component mount
+    useEffect(() => {
+        fetchMovies();
     }, []);
 
     const fetchMovies = async () => {
-    const response = await fetch(
-        "https://api.themoviedb.org/3/movie/popular?api_key=094ef3abfe2380cc211616fc47eb0e8e"
-    );
+        const response = await fetch(
+            "https://api.themoviedb.org/3/movie/popular?api_key=094ef3abfe2380cc211616fc47eb0e8e"
+        );
 
-    const data = await response.json();
+        const data = await response.json();
 
-    setMovies(data.results);
-    setAllMovies(data.results); // ⭐ important
-};
+        setMovies(data.results);
+        setAllMovies(data.results); // Store all movies for filtering
+    };
 
-// Filter movies based on rating
-     const handleFilter = (rate) => {
-    setMinRating(rate);
+    // Filter movies based on rating
+    const handleFilter = (rate) => {
+        // toggle off
+        if (rate === minRating) {
+            setMinRating(0);
+            setMovies(allMovies);
+        } else {
+            setMinRating(rate);
 
-    const filtered = allMovies.filter(
-        movie => movie.vote_average >= rate
-    );
+            const filtered = allMovies.filter(
+                movie => movie.vote_average >= rate
+            );
 
-    setMovies(filtered);
-};
+            setMovies(filtered);
+        }
+    };
 
 
-        
+
+
 
     return (
-    <section className="movie_list">
-        <header className="align_center movie_list_header">
-            <h2 className="align_center movie_list_heading">Popular🔥</h2>
+        <section className="movie_list">
+            <header className="align_center movie_list_header">
+                <h2 className="align_center movie_list_heading">Popular🔥</h2>
 
-            <div className="align_center movie_list_fs">
-                <ul className="align_center movie_filter">
-                   <li
-    className={`movie_filter_item ${minRating === 8 ? "active" : ""}`}
-    onClick={() => handleFilter(8)}
->
-    8+ Star
-</li>
+                <div className="align_center movie_list_fs">
+                    <FilterGroup minRating={minRating} 
+                    handleFilter={handleFilter} 
+                    ratings = {[8,7,6]}
+                    />
 
-<li
-    className={`movie_filter_item ${minRating === 7 ? "active" : ""}`}
-    onClick={() => handleFilter(7)}
->
-    7+ Star
-</li>
+                    <select name="" id="" className="movie_sorting">
+                        <option value="">SortBy</option>
+                        <option value="">Date</option>
+                        <option value="">Rating</option>
+                    </select>
 
-<li
-    className={`movie_filter_item ${minRating === 6 ? "active" : ""}`}
-    onClick={() => handleFilter(6)}
->
-    6+ Star
-</li>
+                    <select name="" id="" className="movie_sorting">
+                        <option value="">Ascending</option>
+                        <option value="">Descending</option>
+                    </select>
+                </div>
+            </header>
 
-                </ul>
-
-            <select name="" id="" className="movie_sorting">
-                <option value="">SortBy</option>
-                <option value="">Date</option>
-                <option value="">Rating</option>
-            </select>
-
-             <select name="" id="" className="movie_sorting">
-                <option value="">Ascending</option>
-                <option value="">Descending</option>
-            </select>
+            <div className="movie_cards">
+                {movies.map((movie) => (
+                    <MovieCard key={movie.id} movie={movie} />
+                ))}
             </div>
-        </header>
-
-        <div className="movie_cards">
-            {movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-            ))}
-        </div>
-    </section>
-  );
-} 
+        </section>
+    );
+}
 
 
 

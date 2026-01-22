@@ -13,7 +13,7 @@ function App() {
       <div className="app">
         <Navbar />
         <MovieList />
-        <main>Main Components</main>
+        <main></main>
       </div>
       </>
   );

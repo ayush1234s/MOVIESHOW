@@ -1,5 +1,5 @@
-import {useState} from 'react';
-import './MovieCard.css';           
+import { useState } from 'react';
+import './MovieCard.css';
 
 const MovieCard = ({ movie }) => {
     return (
