@@ -1,0 +1,69 @@
+.dark_mode {
+    position: relative;
+    width: 60px;
+    height: 30px;
+}
+
+.dark_mode_input {
+    display: none;
+}
+
+.dark_mode_label {
+    width: 60px;
+    height: 30px;
+    background: #222;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+/* toggle circle */
+.dark_mode_label::after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: all 0.3s ease;
+}
+
+/* when dark */
+.dark_mode_input:checked + .dark_mode_label {
+    background: #ffe400;
+}
+
+.dark_mode_input:checked + .dark_mode_label::after {
+    transform: translateX(30px);
+}
+
+/* icons */
+.sun,
+.moon {
+    font-size: 14px;
+    z-index: 1;
+}
+
+.sun {
+    opacity: 1;
+}
+
+.moon {
+    opacity: 0;
+}
+
+/* show moon when dark */
+.dark_mode_input:checked + .dark_mode_label .sun {
+    opacity: 0;
+}
+
+.dark_mode_input:checked + .dark_mode_label .moon {
+    opacity: 1;
+}

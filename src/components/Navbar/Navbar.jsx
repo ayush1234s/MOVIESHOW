@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Navbar.css'
+import DarkMode from '../DarkMode/DarkMode';
 
 
 
@@ -9,6 +10,7 @@ const Navbar = () => {
         <h1>Movieshow</h1>
 
         <div className="navbar-links">
+            <DarkMode />
             <a href="">Popular🔥</a>
             <a href="">Top Rated⭐</a>
             <a href="">Upcoming😛</a>

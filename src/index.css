@@ -1,13 +1,26 @@
+:root {
+  --body_background: #101010;
+  --body_color: #fff;
+  --header_color: #ffe400;
+}
+
+[data-theme="light"] {
+  --body_background: #fff;
+  --body_color: #101010;
+  --header_color: #222;
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 
 }
 
 body{
-  background-color: #101010;
-  color: #fff;
+  background-color: var(--body_background);
+  color: var(--body_color);
 }
 
 .align_center{
